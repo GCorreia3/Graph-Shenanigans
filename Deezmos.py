@@ -44,10 +44,10 @@ def create_line(f, start_x, end_x, x_array, y_array, dx):
         x_array.append(x)
         x = float("%.2f" % (x + dx))
 
-def newton_raphson(f, iteration):
+def newton_raphson(f, iterations):
 
     # Loop through by a set number of times stated with the variable guess_iteration
-    for i in range(iteration):
+    for i in range(iterations):
         """
             Note: we are uing the (2 * i)th value in our array since each iterration we will append 2 new
             x positions, each of which are the exact same. They are still required in drawing the lines. 
@@ -74,6 +74,14 @@ def newton_raphson(f, iteration):
         # Append the new x and y position of the x curve gradient crossing the x axis
         raphson_x.append(x_intercept)
         raphson_y.append(0)
+
+def fast_newton_raphson(f, f_prime, iterations, guess):
+    x = guess
+
+    for i in range(iterations):
+        x = x - (f(x) / f_prime(x))
+
+    print(x)
 
 
 
@@ -141,6 +149,9 @@ raphson_y.append(0)
 
 # Find roots
 newton_raphson(equation, guess_iteration)
+
+# Fast Newton Raphson
+fast_newton_raphson(equation, derived_equation, guess_iteration, root_guess)
 
 print(f"Root Guess: {raphson_x[len(raphson_x) - 1]}")
 
