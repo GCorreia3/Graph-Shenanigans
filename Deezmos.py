@@ -76,11 +76,14 @@ def newton_raphson(f, iterations):
         raphson_y.append(0)
 
 def fast_newton_raphson(f, f_prime, iterations, guess):
+    # Initialises start x value (x nought)
     x = guess
 
+    # Loops through to make x get increasingly closer to a root
     for i in range(iterations):
         x = x - (f(x) / f_prime(x))
 
+    # Print final x value after iterating
     print(x)
 
 
