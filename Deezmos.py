@@ -160,7 +160,8 @@ print(f"Root Guess: {raphson_x[len(raphson_x) - 1]}")
 
 def plot():
     # Curve plot
-    plt.plot(x_array, y_array, color='blue', marker='.', markerfacecolor='red', markeredgecolor='red')
+    #plt.plot(x_array, y_array, color='blue', marker='.', markerfacecolor='red', markeredgecolor='red')
+    plt.plot(x_array, y_array, color='blue')
 
     # Axis plot
     plt.plot(x_horizontal, y_horizontal, color='black')
