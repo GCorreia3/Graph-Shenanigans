@@ -3,19 +3,22 @@ from PIL import Image
 import math
 
 # Setup equations
-equation = lambda x: 3*x**3 + 6*x**2 - x - 20
-derived_equation = lambda x: 9*x**2 + 12*x - 1
+# equation = lambda x: 3*x**3 + 6*x**2 - x - 20
+# derived_equation = lambda x: 9*x**2 + 12*x - 1
+equation = lambda x: x**5 - 5*x**4 + 39*x**3 + 105*x**2 - 700*x + 5000
+derived_equation = lambda x: 5*x**4 - 20*x**3 + 117*x**2 + 210*x - 700
 
-roots = [complex(1.4412, 0), complex(-1.7206, 1.2906), complex(-1.7206, -1.2906)]
+# roots = [complex(1.4412, 0), complex(-1.7206, 1.2906), complex(-1.7206, -1.2906)]
+roots = [complex(2, -6), complex(2, 6), complex(-5, 0), complex(3, 4), complex(3, -4)]
 
-colours = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
+colours = [(162, 250, 163), (146, 201, 177), (79, 117, 155), (93, 81, 121), (87, 31, 78)]
 
 precision = "%.2f"
 
 # Take in inputs
-image_width = 4000
-image_height = 4000
-guess_iteration = 300
+image_width = 400
+image_height = 400
+guess_iteration = 100
 
 image = Image.new("RGB", (image_width, image_height))
 
@@ -58,5 +61,5 @@ for y in range(image_height):
                 final_root = r
                 pixel_map[x, y] = colours[i]
 
-image.save("Fractal2.png")
+#image.save("Fractal3.png")
 image.show()

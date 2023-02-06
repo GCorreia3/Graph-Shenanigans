@@ -3,8 +3,10 @@ import matplotlib.pyplot as plt
 import math, random
 
 # Setup equations
-equation = lambda x: 3*x**3 + 6*x**2 - x - 20
-derived_equation = lambda x: 9*x**2 + 12*x - 1
+# equation = lambda x: 3*x**3 + 6*x**2 - x - 20
+# derived_equation = lambda x: 9*x**2 + 12*x - 1
+equation = lambda x: x**5 - 5*x**4 + 39*x**3 + 105*x**2 - 700*x + 5000
+derived_equation = lambda x: 5*x**4 - 20*x**3 + 117*x**2 + 210*x - 700
 
 precision = "%.2f"
 
@@ -12,26 +14,15 @@ precision = "%.2f"
 start_x = float(input("Enter start value: "))
 end_x = float(input("Enter end value: "))
 step = float(input("Enter step value: "))
-#x_gradient = float(input("X point of gradient: "))
 root_guess = float(input("Initial Root Guess: "))
 guess_iteration = int(input("Guess iteration: "))
 
 print("\n")
 
 # Setup Functions
-def compute_gradient(f, x_pos):
-    x_difference = (x_pos + 0.000001) - x_pos
-    y_difference = f(x_pos + 0.000001) - f(x_pos)
-
-    return y_difference / x_difference
 
 def get_gradient(x_pos):
     return derived_equation(x_pos)
-
-def find_y_intercept(gradient, x_position):
-    y_height = equation(x_position)
-
-    return y_height - gradient * x_position
 
 def create_line(f, start_x, end_x, x_array, y_array, dx):
     x = start_x
@@ -112,38 +103,6 @@ x_vertical = [0, 0]
 y_vertical = [y_min, y_max]
 
 
-# Make gradient line
-
-"""
-gradient = get_gradient(x_gradient)
-
-rounded_gradient = float(precision % gradient)
-
-print(f"Gradient: {rounded_gradient}")
-
-y_intercept = find_y_intercept(rounded_gradient, x_gradient)
-
-gradient_equation = lambda x: rounded_gradient*x + y_intercept
-
-y_gradient = []
-x_gradient = []
-
-if rounded_gradient > 0:
-    ex = (y_min - y_intercept) / rounded_gradient
-    x_finish = (y_max - y_intercept) / rounded_gradient
-elif rounded_gradient == 0:
-    ex = start_x
-    x_finish = end_x
-elif rounded_gradient < 0:
-    ex = (y_max - y_intercept) / rounded_gradient
-    x_finish = (y_min - y_intercept) / rounded_gradient
-
-
-create_line(gradient_equation, ex, x_finish, x_gradient, y_gradient, 0.5)
-
-"""
-
-
 # Set up start coordinates for newton raphson
 
 raphson_x = []
@@ -170,14 +129,8 @@ def plot():
     plt.plot(x_horizontal, y_horizontal, color='black')
     plt.plot(x_vertical, x_vertical, color='black')
 
-    # Gradient line plot
-    """
-    plt.plot(x_gradient, y_gradient, color='green', label=f'Gradient: {rounded_gradient}')
-    """
-
     # Newton raphson plot
-    plt.plot(raphson_x, raphson_y, color='red')
-
+    plt.plot(raphson_x, raphson_y, color='red', label='Newton Raphson Root Finding')
 
     plt.title("Equation Plot")
     plt.xlabel("x")
