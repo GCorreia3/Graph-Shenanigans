@@ -1,6 +1,6 @@
 # Import libraries
 from PIL import Image
-import math
+import math, datetime
 
 # Setup equations
 # equation = lambda x: 3*x**3 + 6*x**2 - x - 20
@@ -16,8 +16,8 @@ colours = [(162, 250, 163), (146, 201, 177), (79, 117, 155), (93, 81, 121), (87,
 precision = "%.2f"
 
 # Take in inputs
-image_width = 400
-image_height = 400
+image_width = 4000
+image_height = 4000
 guess_iteration = 100
 
 image = Image.new("RGB", (image_width, image_height))
@@ -31,7 +31,16 @@ def fast_newton_raphson(f, f_prime, iterations, guess):
 
     # Loops through to make x get increasingly closer to a root
     for i in range(iterations):
-        x = x - (f(x) / f_prime(x))
+        gradient = f_prime(x)
+
+        # Prevents divide by 0 error
+        if gradient != 0:
+            step = f(x) / gradient
+            if step == 0:
+                break
+            x = x - step
+        else:
+            break
 
     # Print final x value after iterating
     return x
@@ -45,7 +54,10 @@ def distance_between_complex_number(z1, z2):
 # Then find the root that the complex number is closest to after a certain number of iterations
 # Finally, set the colour of that pixel to the colour of the root that it was closest to
 
+print(datetime.datetime.now())
+
 for y in range(image_height):
+    print(f"{100 * y / image_height}%")
     for x in range(image_width):
         z = complex(x - (image_width / 2), y - (image_height / 2))
         root = fast_newton_raphson(equation, derived_equation, guess_iteration, z)
@@ -56,10 +68,17 @@ for y in range(image_height):
 
         for i, r in enumerate(roots):
             complex_dist = distance_between_complex_number(root, r)
-            if complex_dist < dist:
+            if complex_dist == 0:
+                final_root = r
+                pixel_map[x, y] = colours[i]
+                break
+            
+            elif complex_dist < dist:
                 dist = complex_dist
                 final_root = r
                 pixel_map[x, y] = colours[i]
 
-#image.save("Fractal3.png")
+print(datetime.datetime.now())
+
+#image.save("Fractal6.png")
 image.show()
