@@ -5,20 +5,24 @@ import math, datetime
 # Setup equations
 # equation = lambda x: 3*x**3 + 6*x**2 - x - 20
 # derived_equation = lambda x: 9*x**2 + 12*x - 1
-equation = lambda x: x**5 - 5*x**4 + 39*x**3 + 105*x**2 - 700*x + 5000
-derived_equation = lambda x: 5*x**4 - 20*x**3 + 117*x**2 + 210*x - 700
+# equation = lambda x: x**5 - 5*x**4 + 39*x**3 + 105*x**2 - 700*x + 5000
+# derived_equation = lambda x: 5*x**4 - 20*x**3 + 117*x**2 + 210*x - 700
+equation = lambda x: x**4 + 4
+derived_equation = lambda x: 4*x**3
 
 # roots = [complex(1.4412, 0), complex(-1.7206, 1.2906), complex(-1.7206, -1.2906)]
-roots = [complex(2, -6), complex(2, 6), complex(-5, 0), complex(3, 4), complex(3, -4)]
+# roots = [complex(2, -6), complex(2, 6), complex(-5, 0), complex(3, 4), complex(3, -4)]
+roots = [complex(1, 1), complex(1, -1), complex(-1, 1), complex(-1, -1)]
 
-colours = [(162, 250, 163), (146, 201, 177), (79, 117, 155), (93, 81, 121), (87, 31, 78)]
+# colours = [(162, 250, 163), (146, 201, 177), (79, 117, 155), (93, 81, 121), (87, 31, 78)]
+colours = [(22, 105, 122), (255, 166, 43), (237, 231, 227), (130, 192, 204)]
 
 precision = "%.2f"
 
 # Take in inputs
-image_width = 4000
-image_height = 4000
-guess_iteration = 100
+image_width = 1000
+image_height = 1000
+guess_iteration = 50
 
 image = Image.new("RGB", (image_width, image_height))
 
@@ -37,16 +41,17 @@ def fast_newton_raphson(f, f_prime, iterations, guess):
         if gradient != 0:
             step = f(x) / gradient
             if step == 0:
-                break
+                return (x, i)
             x = x - step
         else:
-            break
+            return (x, i)
 
     # Print final x value after iterating
-    return x
+    return (x, iterations)
 
 def distance_between_complex_number(z1, z2):
-    return math.sqrt((z2.real - z1.real)**2 + (z2.imag + z1.imag)**2)
+    return abs(z1 - z2)
+    # return (z2.real - z1.real)**2 + (z2.imag - z1.imag)**2
 
 
 # Main loop:
@@ -59,26 +64,31 @@ print(datetime.datetime.now())
 for y in range(image_height):
     print(f"{100 * y / image_height}%")
     for x in range(image_width):
-        z = complex(x - (image_width / 2), y - (image_height / 2))
-        root = fast_newton_raphson(equation, derived_equation, guess_iteration, z)
+        # z = complex(x - (image_width / 2), y - (image_height / 2))
+        z = complex(((x / image_width) * 4) - 2, ((y / image_height) * 4) - 2)
+        root, num_iters = fast_newton_raphson(equation, derived_equation, guess_iteration, z)
 
         final_root = None
 
         dist = math.inf
 
         for i, r in enumerate(roots):
+            col = colours[i]
+            new_col = tuple(component * (num_iters/guess_iteration) for component in col)
+            new_col = tuple(int(x) for x in new_col)
+
             complex_dist = distance_between_complex_number(root, r)
             if complex_dist == 0:
                 final_root = r
-                pixel_map[x, y] = colours[i]
+                pixel_map[x, y] = new_col
                 break
             
             elif complex_dist < dist:
                 dist = complex_dist
                 final_root = r
-                pixel_map[x, y] = colours[i]
+                pixel_map[x, y] = new_col
 
 print(datetime.datetime.now())
 
-#image.save("Fractal6.png")
+#image.save("Fractal9.png")
 image.show()

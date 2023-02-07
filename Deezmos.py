@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 import math, random
 
 # Setup equations
-# equation = lambda x: 3*x**3 + 6*x**2 - x - 20
-# derived_equation = lambda x: 9*x**2 + 12*x - 1
-equation = lambda x: x**5 - 5*x**4 + 39*x**3 + 105*x**2 - 700*x + 5000
-derived_equation = lambda x: 5*x**4 - 20*x**3 + 117*x**2 + 210*x - 700
+equation = lambda x: 3*x**3 + 6*x**2 - x - 20
+derived_equation = lambda x: 9*x**2 + 12*x - 1
+# equation = lambda x: x**5 - 5*x**4 + 39*x**3 + 105*x**2 - 700*x + 5000
+# derived_equation = lambda x: 5*x**4 - 20*x**3 + 117*x**2 + 210*x - 700
 
 precision = "%.2f"
 
