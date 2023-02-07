@@ -5,23 +5,21 @@ import math, datetime
 # Setup equations
 # equation = lambda x: 3*x**3 + 6*x**2 - x - 20
 # derived_equation = lambda x: 9*x**2 + 12*x - 1
-# equation = lambda x: x**5 - 5*x**4 + 39*x**3 + 105*x**2 - 700*x + 5000
-# derived_equation = lambda x: 5*x**4 - 20*x**3 + 117*x**2 + 210*x - 700
-equation = lambda x: x**4 + 4
-derived_equation = lambda x: 4*x**3
+equation = lambda x: x**5 - 5*x**4 + 39*x**3 + 105*x**2 - 700*x + 5000
+derived_equation = lambda x: 5*x**4 - 20*x**3 + 117*x**2 + 210*x - 700
+# equation = lambda x: x**4 + 4
+# derived_equation = lambda x: 4*x**3
 
 # roots = [complex(1.4412, 0), complex(-1.7206, 1.2906), complex(-1.7206, -1.2906)]
-# roots = [complex(2, -6), complex(2, 6), complex(-5, 0), complex(3, 4), complex(3, -4)]
-roots = [complex(1, 1), complex(1, -1), complex(-1, 1), complex(-1, -1)]
+roots = [complex(2, -6), complex(2, 6), complex(-5, 0), complex(3, 4), complex(3, -4)]
+# roots = [complex(1, 1), complex(1, -1), complex(-1, 1), complex(-1, -1)]# 
 
-# colours = [(162, 250, 163), (146, 201, 177), (79, 117, 155), (93, 81, 121), (87, 31, 78)]
-colours = [(22, 105, 122), (255, 166, 43), (237, 231, 227), (130, 192, 204)]
-
-precision = "%.2f"
+colours = [(162, 250, 163), (146, 201, 177), (79, 117, 155), (93, 81, 121), (87, 31, 78)]
+# colours = [(22, 105, 122), (255, 166, 43), (237, 231, 227), (130, 192, 204)]
 
 # Take in inputs
-image_width = 1000
-image_height = 1000
+image_width = 4000
+image_height = 4000
 guess_iteration = 50
 
 image = Image.new("RGB", (image_width, image_height))
@@ -65,8 +63,10 @@ for y in range(image_height):
     print(f"{100 * y / image_height}%")
     for x in range(image_width):
         # z = complex(x - (image_width / 2), y - (image_height / 2))
-        z = complex(((x / image_width) * 4) - 2, ((y / image_height) * 4) - 2)
+        z = complex(((x / image_width) * 64) - 32, ((y / image_height) * 64) - 32)
         root, num_iters = fast_newton_raphson(equation, derived_equation, guess_iteration, z)
+        if num_iters == 0:
+            num_iters = 1
 
         final_root = None
 
@@ -74,7 +74,8 @@ for y in range(image_height):
 
         for i, r in enumerate(roots):
             col = colours[i]
-            new_col = tuple(component * (num_iters/guess_iteration) for component in col)
+            # new_col = tuple(component * (num_iters/guess_iteration) for component in col)
+            new_col = tuple(component * (guess_iteration / (num_iters * 10)) for component in col)
             new_col = tuple(int(x) for x in new_col)
 
             complex_dist = distance_between_complex_number(root, r)
@@ -90,5 +91,5 @@ for y in range(image_height):
 
 print(datetime.datetime.now())
 
-#image.save("Fractal9.png")
+#image.save("Fractal10.png")
 image.show()
