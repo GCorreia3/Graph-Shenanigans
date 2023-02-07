@@ -20,18 +20,18 @@ def mandelbrot_set(f, iterations, c):
 
     # Repeatedly inputs zn into the function until the function either is too large(diverges) or it converges
     for i in range(iterations):
-        if abs(z) >= 2:
+        if abs(z) > 4:
             return False, i
         z = f(z, c)
 
-    return abs(z) <= 2, iterations
+    return abs(z) <= 4, iterations
 
 
 
 for y in range(image_height):
     print(f"{100 * y / image_height}%")
     for x in range(image_width):
-        c = complex(((x / image_width) * 4) - 2, ((y / image_height) * 4) - 2)
+        c = complex(((x / image_width) * 4) - 3, ((y / image_height) * 4) - 2)
         converges, index = mandelbrot_set(equation, iterations, c)
 
         if converges:
