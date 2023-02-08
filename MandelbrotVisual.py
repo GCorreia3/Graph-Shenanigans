@@ -27,10 +27,12 @@ iterations = 10
 solutions = []
 
 c_position = complex(0.5, 0.5)
-z0_position = complex(-0.5, -0.5)
+z0_position = complex(0, 0)
 
 moving_c = False
 moving_z0 = False
+
+mandelbrot_image = pygame.image.load('MandelbrotReference.png')
 
 # Setup Functions
 def mandelbrot_set(f, iterations, z0, c):
@@ -79,6 +81,8 @@ def draw_screen():
 
     win.fill(background_colour)
 
+    win.blit(mandelbrot_image, (0, 0))
+
     # Y axis
     pygame.draw.line(win, (255, 255, 255), (screen_width / 2, 0), (screen_width / 2, screen_height), 1)
 
@@ -89,7 +93,7 @@ def draw_screen():
         pygame.draw.line(win, (255, 255, 255), get_screen_pos(solutions[i]), get_screen_pos(solutions[i+1]), 2)
 
     for solution in solutions:
-        pygame.draw.circle(win, (255, 0, 0), get_screen_pos(solution), 60 / zoom)
+        pygame.draw.circle(win, (255, 255, 255), get_screen_pos(solution), 60 / zoom)
 
     # Draw c
     pygame.draw.circle(win, (0, 255, 0), get_screen_pos(c_position), 60 / zoom)

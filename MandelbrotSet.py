@@ -31,7 +31,7 @@ def mandelbrot_set(f, iterations, c):
 for y in range(image_height):
     print(f"{100 * y / image_height}%")
     for x in range(image_width):
-        c = complex(((x / image_width) * 4) - 3, ((y / image_height) * 4) - 2)
+        c = complex(((x / image_width) * 4) - 2, ((y / image_height) * 4) - 2)
         converges, index = mandelbrot_set(equation, iterations, c)
 
         if converges:
@@ -40,5 +40,5 @@ for y in range(image_height):
             pixel_map[x, y] = (255, int(255 * (index / iterations)), int(255 * (index / iterations)))
 
 
-#image.save("Mandelbrot3.png")
+image.save("MandelbrotReference.png")
 image.show()
