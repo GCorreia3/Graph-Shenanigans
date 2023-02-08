@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-f = lambda z, c: z**2 + c
+f = lambda z: z**2 + complex(-0.53, 0.5)
 
-x_start, y_start = -1, -1.5
+x_start, y_start = -1.5, -1.5
 width, height = 3, 3
 density_per_unit = 300
 
@@ -17,13 +17,13 @@ ax = plt.axes()
 
 def mandelbrot(x, y, threshold):
     # initial conditions
-    c = complex(x, y)
-    z = complex(0, 0)
+    #c = complex(x, y)
+    z = complex(x, y)
     
     for i in range(threshold):
         if abs(z) > 2:
             return i
-        z = f(z, c)
+        z = f(z)
         
     return threshold - 1
 
@@ -46,4 +46,4 @@ def animate(i):
     return [img]
  
 anim = animation.FuncAnimation(fig, animate, frames=45, interval=120, blit=True)
-#anim.save('mandelbrot5.gif')
+anim.save('juliaset2.gif')

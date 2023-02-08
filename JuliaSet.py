@@ -2,12 +2,12 @@
 from PIL import Image
 
 # Setup equations
-equation = lambda z: z**2 + complex(-0.56, -0.5)
+equation = lambda z: z**2 + complex(-0.53, 0.5)
 
 # Take in inputs
-image_width = 4000
-image_height = 4000
-iterations = 200
+image_width = 1000
+image_height = 1000
+iterations = 300
 
 image = Image.new("RGB", (image_width, image_height))
 
@@ -31,7 +31,7 @@ def julia_set(f, iterations, z0):
 for y in range(image_height):
     print(f"{100 * y / image_height}%")
     for x in range(image_width):
-        z0 = complex(((x / image_width) * 0.1) + 0.09, ((y / image_height) * 0.1) - 0.08)
+        z0 = complex(((x / image_width) * 4) -2, ((y / image_height) * 4) - 2)
 
         converges, index = julia_set(equation, iterations, z0)
 
