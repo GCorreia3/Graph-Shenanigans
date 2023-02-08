@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-f = lambda z, c: z**3 + c
+f = lambda z, c: z**2 + c
 
 x_start, y_start = -1, -1.5
-width, height = 2, 3
+width, height = 3, 3
 density_per_unit = 300
 
 # real and imaginary axis
@@ -21,7 +21,7 @@ def mandelbrot(x, y, threshold):
     z = complex(0, 0)
     
     for i in range(threshold):
-        if abs(z) > 4:
+        if abs(z) > 2:
             return i
         z = f(z, c)
         
@@ -46,4 +46,4 @@ def animate(i):
     return [img]
  
 anim = animation.FuncAnimation(fig, animate, frames=45, interval=120, blit=True)
-anim.save('mandelbrot3.gif')
+#anim.save('mandelbrot5.gif')
