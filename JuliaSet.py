@@ -41,5 +41,5 @@ for y in range(image_height):
             pixel_map[x, y] = (255, int(255 * (index / iterations)), int(255 * (index / iterations)))
 
 
-image.save("Juliaset2.png")
+#image.save("Juliaset2.png")
 image.show()

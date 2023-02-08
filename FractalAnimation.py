@@ -46,4 +46,4 @@ def animate(i):
     return [img]
  
 anim = animation.FuncAnimation(fig, animate, frames=45, interval=120, blit=True)
-anim.save('juliaset2.gif')
+anim.save('juliaset3.gif')
