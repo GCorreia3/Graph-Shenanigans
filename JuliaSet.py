@@ -2,12 +2,12 @@
 from PIL import Image
 
 # Setup equations
-equation = lambda z: z**2 + complex(-0.53, 0.5)
+equation = lambda z: z**2 + complex(0.35, 0.35)
 
 # Take in inputs
 image_width = 1000
 image_height = 1000
-iterations = 300
+iterations = 100
 
 image = Image.new("RGB", (image_width, image_height))
 

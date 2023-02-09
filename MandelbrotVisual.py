@@ -26,7 +26,7 @@ iterations = 10
 
 solutions = []
 
-c_position = complex(0.5, 0.5)
+c_position = complex(-0.53, 0.5)
 z0_position = complex(0, 0)
 
 moving_c = False
@@ -93,7 +93,7 @@ def draw_screen():
         pygame.draw.line(win, (255, 255, 255), get_screen_pos(solutions[i]), get_screen_pos(solutions[i+1]), 2)
 
     for solution in solutions:
-        pygame.draw.circle(win, (255, 255, 255), get_screen_pos(solution), 60 / zoom)
+        pygame.draw.circle(win, (255, 255, 255), get_screen_pos(solution), 40 / zoom)
 
     # Draw c
     pygame.draw.circle(win, (0, 255, 0), get_screen_pos(c_position), 60 / zoom)
