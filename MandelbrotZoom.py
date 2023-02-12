@@ -75,6 +75,8 @@ def draw_mandelbrot():
     ax.set_xticks([], [])
     ax.set_yticks([], [])
 
+    print(zoom_pos.real - (width(zoom) / 2), width(zoom), zoom_pos.imag - (width(zoom) / 2))
+
     r_axis = real_axis(zoom_pos.real - (width(zoom) / 2), width(zoom), resolution)
     i_axis = imaginary_axis(zoom_pos.imag - (width(zoom) / 2), width(zoom), resolution)
 

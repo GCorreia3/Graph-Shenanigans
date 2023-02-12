@@ -5,9 +5,9 @@ import matplotlib.colors
 
 f = lambda z, c: z**2 + c
 
-x_start, y_start = -1.5, -1.5
-width, height = 3, 3
-resolution = 500
+x_start, y_start = 0.33302343749999985, 0.043875000000000046
+width, height = 0.005859375, 0.005859375
+resolution = 4000
 iterations = 200
 
 # real and imaginary axis
@@ -47,4 +47,4 @@ for x in range(len(real_axis)):
         X[x, y] = mandelbrot(real_axis[x], imaginary_axis[y], iterations)
 
 
-plt.imsave("MandelbrotZoomReference.png", arr=X.T, cmap=cmap)
+plt.imsave("newmandel3.png", arr=X.T, cmap=cmap)
