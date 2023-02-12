@@ -51,5 +51,5 @@ def animate(i):
     img = ax.imshow(X.T, interpolation="bicubic", cmap=cmap)
     return [img]
  
-anim = animation.FuncAnimation(fig, animate, frames=20, interval=120, blit=True)
+anim = animation.FuncAnimation(fig, animate, frames=45, interval=120, blit=True)
 anim.save('mandelbrot4.gif')
