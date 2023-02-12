@@ -15,6 +15,7 @@ equation = lambda z, c: z**2 + c
 
 x_start, y_start = -1.5, -1.5
 zoom = 1
+dz = 1
 start_width = 3
 width = lambda zoom: start_width / zoom
 resolution = 500
@@ -59,15 +60,16 @@ def mandelbrot(f, x, y, threshold):
 
 def draw_mandelbrot():
     mouse = pygame.mouse.get_pos()
-    print(mouse)
+
     zoom_pos = screen_pos_to_complex(mouse)
+
     global last_zoom_pos
     last_zoom_pos = zoom_pos
-
-    print(zoom_pos)
     
+    global dz
     global zoom
-    zoom += 10
+    zoom += dz
+    dz *= 2
 
     ax.clear()
     ax.set_xticks([], [])
