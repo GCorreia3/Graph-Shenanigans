@@ -8,7 +8,7 @@ f = lambda z, c: z**2 + c
 x_start, y_start = -1.5, -1.5
 width, height = 3, 3
 resolution = 500
-iterations = 100
+iterations = 200
 
 # real and imaginary axis
 real_axis = np.linspace(x_start, x_start + width, resolution)
